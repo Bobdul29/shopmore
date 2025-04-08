@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* Reuse all CSS styles from store.html */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width:100%;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Hero Section */
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348');
+  background-size: cover;
+  background-position: center;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Product Card Styles */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.product-card .price {
+  color: #333;
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.product-card .specs {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.product-card button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #555;
+}
+
+/* Product Grid Layout */
+.product-grid {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.category-title {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 1.8rem;
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 30px 0;
+  margin-top: 50px;
+}
+</style>
+</head>
+<body style="background-color:white;">
+
+<div class="navbar">
+  <a href="correction store.html">Home</a>
+  <a href="#account">Account</a>
+  <a href="cart.html">Cart</a>
+  <div class="dropdown">
+    <button class="dropbtn">More
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="mobile.html">MobilePhones/other Device</a>
+      <a href="clothes.html">Clothes</a>
+      <a href="shoes.html">Shoes</a>
+      <a href="beauty.html">Beauty</a>
+      <a href="home-appliances.html">Home Appliances</a>
+    </div>
+  </div> 
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Beauty Collection</h1>
+    <p>Discover premium skincare products for radiant beauty</p>
+  </div>
+</div>
+
+<!-- Product Grid Section -->
+<div class="product-grid">
+  <div class="grid-container">
+    <!-- Skin Care -->
+    <h2 class="category-title">Skin Care</h2>
+    
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="image/mois.jpg" alt="Moisturizing Cream">
+      <h3>Hydrating Moisturizer</h3>
+      <div class="specs">
+        <p><strong>Type:</strong> Day Cream</p>
+        <p><strong>Size:</strong> 50ml</p>
+        <p><strong>Skin Type:</strong> All skin types</p>
+        <p><strong>Key Ingredients:</strong> Hyaluronic Acid, Vitamin E</p>
+      </div>
+      <p class="price">₦12,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="image/night.jpeg" alt="Anti-Aging Cream">
+      <h3>Anti-Aging Night Cream</h3>
+      <div class="specs">
+        <p><strong>Type:</strong> Night Cream</p>
+        <p><strong>Size:</strong> 50ml</p>
+        <p><strong>Skin Type:</strong> Mature skin</p>
+        <p><strong>Key Ingredients:</strong> Retinol, Collagen</p>
+      </div>
+      <p class="price">₦18,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="image/sun.jpg" alt="Sunscreen">
+      <h3>SPF 50 Sunscreen</h3>
+      <div class="specs">
+        <p><strong>Type:</strong> Sun Protection</p>
+        <p><strong>Size:</strong> 100ml</p>
+        <p><strong>Skin Type:</strong> All skin types</p>
+        <p><strong>Key Features:</strong> Non-greasy, Water-resistant</p>
+      </div>
+      <p class="price">₦15,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="image/vit c.jpg" alt="Face Serum">
+      <h3>Vitamin C Serum</h3>
+      <div class="specs">
+        <p><strong>Type:</strong> Treatment Serum</p>
+        <p><strong>Size:</strong> 30ml</p>
+        <p><strong>Skin Type:</strong> Dull skin</p>
+        <p><strong>Key Benefits:</strong> Brightening, Even skin tone</p>
+      </div>
+      <p class="price">₦22,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <!-- Body Care -->
+    <h2 class="category-title">Body Care</h2>
+    
+    <!-- Product 5 -->
+    <div class="product-card">
+      <img src="image/Nourishing.jpg" alt="Body Lotion">
+      <h3>Nourishing Body Lotion</h3>
+      <div class="specs">
+        <p><strong>Type:</strong> Moisturizer</p>
+        <p><strong>Size:</strong> 400ml</p>
+        <p><strong>Skin Type:</strong> Dry skin</p>
+        <p><strong>Key Ingredients:</strong> Shea Butter, Coconut Oil</p>
+      </div>
+      <p class="price">₦14,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Product 6 -->
+    <div class="product-card">
+      <img src="image/body.jpg" alt="Body Scrub">
+      <h3>Exfoliating Body Scrub</h3>
+      <div class="specs">
+        <p><strong>Type:</strong> Exfoliator</p>
+        <p><strong>Size:</strong> 300ml</p>
+        <p><strong>Skin Type:</strong> All skin types</p>
+        <p><strong>Key Ingredients:</strong> Sea Salt, Essential Oils</p>
+      </div>
+      <p class="price">₦16,999</p>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px;">
+    <div>
+      <h3>About Us</h3>
+      <p>Your trusted source for premium beauty and skincare products.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="Home.html" style="color: white; text-decoration: none;">Home</a></li>
+        <li><a href="beauty.html" style="color: white; text-decoration: none;">Beauty</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">Contact</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact Info</h3>
+      <p>Email: info@store.com</p>
+      <p>Phone: +234 800 000 0000</p>
+      <p>Lagos, Nigeria</p>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+    <p>&copy; 2023 Beauty Store. All rights reserved.</p>
+  </div>
+</footer>
+<script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width:100%;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Hero Section Styles */
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a');
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: #555;
+}
+
+/* Product Card Styles */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.product-card .price {
+  color: #333;
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.product-card .specs {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.product-card button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.product-card button:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 480px) {
+  .product-card button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Product Grid Layout */
+.product-grid {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all View More buttons
+  const viewMoreButtons = document.querySelectorAll('.product-card button');
+  
+  // Add click event to each button
+  viewMoreButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Get product card element
+      const productCard = this.closest('.product-card');
+      
+      // Get product details
+      const productName = productCard.querySelector('h3').textContent;
+      const productPrice = productCard.querySelector('.price').textContent;
+      const productImage = productCard.querySelector('img').src;
+      const productSpecs = Array.from(productCard.querySelectorAll('.specs p'))
+                               .map(p => p.textContent)
+                               .join(', ');
+      
+      // Show loading state
+      const originalText = this.textContent;
+      this.textContent = 'Loading...';
+      this.disabled = true;
+      
+      // Simulate navigation delay (replace with actual navigation)
+      setTimeout(() => {
+        // For demo purposes, show an alert with product details
+        alert(`Viewing: ${productName}\nPrice: ${productPrice}\nSpecs: ${productSpecs}`);
+        
+        // Restore button state
+        this.textContent = originalText;
+        this.disabled = false;
+      }, 1000);
+    });
+  });
+});
+</script>
+</head>
+<body style="background-color:white;">
+
+<div class="navbar">
+  <a href="correction store.html">Home</a>
+  <a href="#news">Account</a>
+  <a href="cart.html">Cart</a>
+  <div class="dropdown">
+    <button class="dropbtn">More
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="mobile.html">MobilePhones/other Device</a>
+      <a href="clothes.html">Clothes</a>
+      <a href="shoes.html">Shoes</a>
+      <a href="beauty.html">Beauty</a>
+      <a href="home-appliances.html">Home Appliances</a>
+    </div>
+  </div> 
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Welcome to Our Store</h1>
+    <p>Discover amazing products at unbeatable prices</p>
+    <a href="#shop" class="hero-btn">Shop Now</a>
+  </div>
+</div>
+
+<!-- Product Grid Section -->
+<div class="product-grid">
+  <h2 style="text-align:center; margin:30px 0;">Featured Products</h2>
+  <div class="grid-container">
+    <!-- Mobile Phones -->
+    <h2 class="category-title">Mobile Phones</h2>
+    <div class="product-card">
+      <img src="image/iphone-12-pro-max.jpg" alt="Smartphone">
+      <h3>iPhone 12 Pro Max</h3>
+      <div class="specs">
+        <p>6.7" Super Retina XDR</p>
+        <p>128GB Storage</p>
+        <p>Triple Camera System</p>
+      </div>
+      <p class="price">₦599,999</p>
+      <a href="mobile.html" class="hero-btn">Veiw More</a>
+    </div>
+
+    <!-- Clothes -->
+    <h2 class="category-title">Clothes</h2>
+    <div class="product-card">
+      <img src="image/Textured Knit T-Shirt.jpeg" alt="Men's Shirt">
+      <h3>Premium Cotton Shirt</h3>
+      <div class="specs">
+        <p>100% Cotton</p>
+        <p>Multiple Colors</p>
+        <p>Sizes: S-XXL</p>
+      </div>
+      <p class="price">₦12,000</p>
+      <a href="clothes.html" class="hero-btn">Veiw More</a>
+    </div>
+
+    <!-- Shoes -->
+    <h2 class="category-title">Shoes</h2>
+    <div class="product-card">
+      <img src="image/running.jpg" alt="Running Shoes">
+      <h3>Sports Running Shoes</h3>
+      <div class="specs">
+        <p>Breathable Mesh</p>
+        <p>Cushioned Sole</p>
+        <p>Sizes: 38-45</p>
+      </div>
+      <p class="price">₦25,000</p>
+      <a href="shoes.html" class="hero-btn">Veiw More</a>
+    </div>
+
+    <!-- Beauty -->
+    <h2 class="category-title">Beauty</h2>
+    <div class="product-card">
+      <img src="image/geo.jpg" alt="Skincare Set">
+      <h3>Complete Skincare Set</h3>
+      <div class="specs">
+        <p>5-Piece Set</p>
+        <p>For All Skin Types</p>
+        <p>Organic Ingredients</p>
+      </div>
+      <p class="price">₦18,000</p>
+      <a href="beauty.html" class="hero-btn">Veiw More</a>
+    </div>
+
+    <!-- Home Appliances -->
+    <h2 class="category-title">Home Appliances</h2>
+    <div class="product-card">
+      <img src="image/air fryer.jpeg" alt="Air Fryer">
+      <h3>Digital Air Fryer</h3>
+      <div class="specs">
+        <p>5.5L Capacity</p>
+        <p>8 Presets</p>
+        <p>Digital Display</p>
+      </div>
+      <p class="price">₦75,000</p>
+      <a href="home-appliances.html" class="hero-btn">Veiw More</a>
+    </div>
+  </div>
+</div>
+
+<footer style="background-color: #333; color: white; padding: 30px 0; margin-top: 50px;">
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px;">
+    <div>
+      <h3>About Us</h3>
+      <p>Your trusted online store for quality electronics and gadgets at competitive prices.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: white; text-decoration: none;">Home</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">Products</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">Contact</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact Info</h3>
+      <p>Email: info@store.com</p>
+      <p>Phone: +234 800 000 0000</p>
+      <p>Lagos, Nigeria</p>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+    <p>&copy; 2023 Electronics Store. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

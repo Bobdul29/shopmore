@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* Reuse all CSS styles from cart.html */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width:100%;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Checkout Page Styles */
+.checkout-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.checkout-form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #555;
+}
+
+.order-summary {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary-total {
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+</style>
+</head>
+<body style="background-color:white;">
+
+<div class="navbar">
+  <a href="correction store.html">Home</a>
+  <a href="#account">Account</a>
+  <a href="cart.html">Cart</a>
+  <div class="dropdown">
+    <button class="dropbtn">More
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="mobile.html">MobilePhones/other Device</a>
+      <a href="clothes.html">Clothes</a>
+      <a href="shoes.html">Shoes</a>
+      <a href="beauty.html">Beauty</a>
+      <a href="home-appliances.html">Home Appliances</a>
+    </div>
+  </div> 
+</div>
+
+<div class="checkout-container">
+  <div class="checkout-header">
+    <h1>Checkout</h1>
+  </div>
+  
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <div id="order-items">
+      <!-- Items will be populated by JavaScript -->
+    </div>
+    <div class="summary-item">
+      <span>Subtotal:</span>
+      <span id="subtotal">₦0</span>
+    </div>
+    <div class="summary-item">
+      <span>Shipping:</span>
+      <span id="shipping">₦2,500</span>
+    </div>
+    <div class="summary-total">
+      <span>Total:</span>
+      <span id="total">₦2,500</span>
+    </div>
+  </div>
+  
+  <form class="checkout-form">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="address">Shipping Address</label>
+      <textarea id="address" rows="4" required></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="payment">Payment Method</label>
+      <select id="payment" required>
+        <option value="">Select payment method</option>
+        <option value="card">Credit/Debit Card</option>
+        <option value="bank">Bank Transfer</option>
+        <option value="cash">Cash on Delivery</option>
+      </select>
+    </div>
+    
+    <button type="submit" class="submit-btn">Complete Order</button>
+  </form>
+</div>
+
+<script>
+// Load cart items and display order summary
+document.addEventListener('DOMContentLoaded', function() {
+  // Get cart data with error handling
+  let cart;
+  try {
+    const cartData = localStorage.getItem('cart');
+    cart = cartData ? JSON.parse(cartData) : [];
+    if (!Array.isArray(cart)) {
+      console.error('Invalid cart data format, resetting cart');
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  } catch (e) {
+    console.error('Error parsing cart data:', e);
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+  const orderItems = document.getElementById('order-items');
+  
+  if (cart.length === 0) {
+    orderItems.innerHTML = '<p>Your cart is empty</p>';
+    return;
+  }
+
+  // Calculate totals with proper currency parsing
+  const subtotal = cart.reduce((sum, item) => {
+    // Remove currency symbol and thousands separators
+    const numericPrice = item.price.replace(/[^\d.]/g, '');
+    const price = parseFloat(numericPrice);
+    if (isNaN(price)) {
+      console.error('Invalid price format:', item.price);
+      return sum;
+    }
+    return sum + (price * item.quantity);
+  }, 0);
+  
+  const shipping = subtotal > 0 ? 2500 : 0;
+  const total = subtotal + shipping;
+
+  // Display items
+  cart.forEach(item => {
+    const itemElement = document.createElement('div');
+    itemElement.className = 'summary-item';
+    itemElement.innerHTML = `
+      <span>${item.name} x${item.quantity}</span>
+      <span>${item.price}</span>
+    `;
+    orderItems.appendChild(itemElement);
+  });
+
+  // Display totals
+  document.getElementById('subtotal').textContent = `₦${subtotal.toLocaleString()}`;
+  document.getElementById('shipping').textContent = `₦${shipping.toLocaleString()}`;
+  document.getElementById('total').textContent = `₦${total.toLocaleString()}`;
+
+  // Handle form submission
+  document.querySelector('.checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validate form
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const payment = document.getElementById('payment').value;
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name) {
+      alert('Please enter your full name');
+      return;
+    }
+    if (!email || !emailRegex.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    if (!address) {
+      alert('Please enter your shipping address');
+      return;
+    }
+    if (!payment) {
+      alert('Please select a payment method');
+      return;
+    }
+    
+    if (cart.length === 0) {
+      alert('Your cart is empty. Please add items before checking out.');
+      window.location.href = 'cart.html';
+      return;
+    }
+
+    // Prepare order data
+    const order = {
+      customer: { name, email, address, payment },
+      items: cart,
+      subtotal: document.getElementById('subtotal').textContent,
+      shipping: document.getElementById('shipping').textContent,
+      total: document.getElementById('total').textContent,
+      date: new Date().toISOString()
+    };
+
+    // In a real app, you would:
+    // 1. Send order to server
+    // 2. Process payment
+    // 3. Save to database
+    console.log('Order submitted:', order); // For debugging
+    
+    // Show order confirmation
+    const confirmed = confirm(`Order Summary:\n\nItems: ${cart.length}\nTotal: ${order.total}\n\nProceed with payment?`);
+    
+    if (confirmed) {
+      try {
+        // Simulate payment processing
+        setTimeout(() => {
+          localStorage.removeItem('cart');
+          alert('Payment successful! Your order is confirmed.');
+          window.location.href = 'correction store.html';
+        }, 1500);
+      } catch (error) {
+        console.error('Payment processing error:', error);
+        alert('Payment failed. Your cart has been preserved. Please try again.');
+      }
+    }
+  });
+
+  // Remove the JavaScript dropdown toggle since we're using CSS :hover
+  // This prevents conflict between the two implementations
+});
+</script>
+
+</body>
+</html>

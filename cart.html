@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* Reuse all CSS styles from store.html */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width:100%;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Cart Page Styles */
+.cart-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.cart-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cart-items {
+  display: grid;
+  gap: 20px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.item-details h3 {
+  margin: 0 0 10px 0;
+}
+
+.item-details p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.item-price {
+  font-weight: bold;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  background-color: #333;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.remove-item {
+  color: #ff0000;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cart-summary {
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.checkout-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.checkout-btn:hover {
+  background-color: #555;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 50px 0;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 30px 0;
+  margin-top: 50px;
+}
+</style>
+<script>
+// Cart functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Get cart from localStorage
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  // DOM elements
+  const cartItemsContainer = document.querySelector('.cart-items');
+  const cartSummary = document.querySelector('.cart-summary');
+  const emptyCartMsg = document.createElement('div');
+  emptyCartMsg.className = 'empty-cart';
+  emptyCartMsg.innerHTML = '<p>Your cart is empty</p><a href="correction store.html">Continue Shopping</a>';
+
+  // Render cart items
+  function renderCart() {
+    cartItemsContainer.innerHTML = '';
+    
+    if (cart.length === 0) {
+      cartItemsContainer.appendChild(emptyCartMsg);
+      cartSummary.style.display = 'none';
+      return;
+    }
+
+    cartSummary.style.display = 'block';
+    
+    cart.forEach((item, index) => {
+      const cartItem = document.createElement('div');
+      cartItem.className = 'cart-item';
+      cartItem.dataset.index = index;
+      
+      cartItem.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="item-details">
+          <h3>${item.name}</h3>
+          <p class="item-price">${item.price}</p>
+          <span class="remove-item">Remove</span>
+        </div>
+        <div class="quantity-controls">
+          <button class="decrement">-</button>
+          <span class="quantity">${item.quantity}</span>
+          <button class="increment">+</button>
+        </div>
+      `;
+      
+      cartItemsContainer.appendChild(cartItem);
+    });
+
+    updateSummary();
+  }
+
+  // Update cart summary
+  function updateSummary() {
+    const subtotal = cart.reduce((sum, item) => {
+      const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+      return sum + (price * item.quantity);
+    }, 0);
+    
+    const shipping = subtotal > 0 ? 2500 : 0;
+    const total = subtotal + shipping;
+
+    document.querySelector('.summary-row:nth-child(1) span:last-child').textContent = `₦${subtotal.toLocaleString()}`;
+    document.querySelector('.summary-row:nth-child(2) span:last-child').textContent = `₦${shipping.toLocaleString()}`;
+    document.querySelector('.summary-row:nth-child(3) span:last-child').innerHTML = `<strong>₦${total.toLocaleString()}</strong>`;
+  }
+
+  // Save cart to localStorage
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+  }
+
+  // Update cart count in navbar
+  function updateCartCount() {
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    const cartLink = document.querySelector('a[href="cart.html"]');
+    if (cartLink) {
+      cartLink.innerHTML = `Cart (${cartCount})`;
+    }
+  }
+
+  // Event delegation for buttons
+  cartItemsContainer.addEventListener('click', function(e) {
+    const itemIndex = parseInt(e.target.closest('.cart-item').dataset.index);
+    const item = cart[itemIndex];
+    const quantityElement = e.target.closest('.cart-item').querySelector('.quantity');
+
+    if (e.target.classList.contains('decrement')) {
+      if (item.quantity > 1) {
+        item.quantity--;
+        quantityElement.textContent = item.quantity;
+        saveCart();
+        updateSummary();
+      }
+    } else if (e.target.classList.contains('increment')) {
+      item.quantity++;
+      quantityElement.textContent = item.quantity;
+      saveCart();
+      updateSummary();
+    } else if (e.target.classList.contains('remove-item')) {
+      cart.splice(itemIndex, 1);
+      saveCart();
+      renderCart();
+    }
+  });
+
+  // Checkout button
+  document.querySelector('.checkout-btn').addEventListener('click', function() {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    
+    // Create order summary
+    let orderSummary = 'Order Summary:\n\n';
+    cart.forEach(item => {
+      orderSummary += `${item.name} x${item.quantity} - ${item.price}\n`;
+    });
+    
+    // Calculate total
+    const subtotal = cart.reduce((sum, item) => {
+      const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+      return sum + (price * item.quantity);
+    }, 0);
+    const shipping = subtotal > 0 ? 2500 : 0;
+    const total = subtotal + shipping;
+    
+    orderSummary += `\nSubtotal: ₦${subtotal.toLocaleString()}`;
+    orderSummary += `\nShipping: ₦${shipping.toLocaleString()}`;
+    orderSummary += `\nTotal: ₦${total.toLocaleString()}`;
+    
+    // Show confirmation
+    if (confirm(`${orderSummary}\n\nProceed to checkout?`)) {
+      // In a real app, you would:
+      // 1. Save the order to a database
+      // 2. Process payment
+      // 3. Redirect to a confirmation page
+      alert('Order placed successfully!');
+      localStorage.removeItem('cart');
+      window.location.reload();
+    }
+  });
+
+  // Initial render
+  renderCart();
+  updateCartCount();
+});
+</script>
+</head>
+<body style="background-color:white;">
+
+<div class="navbar">
+  <a href="correction store.html">Home</a>
+  <a href="#account">Account</a>
+  <a href="cart.html">Cart</a>
+  <div class="dropdown">
+    <button class="dropbtn">More
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="mobile.html">MobilePhones/other Device</a>
+      <a href="clothes.html">Clothes</a>
+      <a href="shoes.html">Shoes</a>
+      <a href="beauty.html">Beauty</a>
+      <a href="home-appliances.html">Home Appliances</a>
+    </div>
+  </div> 
+</div>
+
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>Your Shopping Cart</h1>
+  </div>
+
+  <div class="cart-items">
+    <!-- Items will appear here when added -->
+  </div>
+
+  <div class="cart-summary">
+    <div class="summary-row">
+      <span>Subtotal:</span>
+      <span>₦623,999</span>
+    </div>
+    <div class="summary-row">
+      <span>Shipping:</span>
+      <span>₦2,500</span>
+    </div>
+    <div class="summary-row">
+      <span>Total:</span>
+      <span><strong>₦626,499</strong></span>
+    </div>
+    <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px;">
+    <div>
+      <h3>About Us</h3>
+      <p>Your trusted online store for quality products at competitive prices.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="correction store.html" style="color: white; text-decoration: none;">Home</a></li>
+        <li><a href="cart.html" style="color: white; text-decoration: none;">Cart</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">Contact</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact Info</h3>
+      <p>Email: info@store.com</p>
+      <p>Phone: +234 800 000 0000</p>
+      <p>Lagos, Nigeria</p>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+    <p>&copy; 2023 Store. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

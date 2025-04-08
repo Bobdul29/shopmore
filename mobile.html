@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* Reuse all CSS styles from store.html */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width:100%;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Hero Section */
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9');
+  background-size: cover;
+  background-position: center;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Product Card Styles */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.product-card .price {
+  color: #333;
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.product-card .specs {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.product-card button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #555;
+}
+
+/* Product Grid Layout */
+.product-grid {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 30px 0;
+  margin-top: 50px;
+}
+</style>
+</head>
+<body style="background-color:white;">
+
+<div class="navbar">
+  <a href="correction store.html">Home</a>
+  <a href="#account">Account</a>
+  <a href="cart.html">Cart</a>
+  <div class="dropdown">
+    <button class="dropbtn">More
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="mobile.html">MobilePhones/other Device</a>
+      <a href="clothes.html">Clothes</a>
+      <a href="shoes.html">Shoes</a>
+      <a href="beauty.html">Beauty</a>
+      <a href="home-appliances.html">Home Appliances</a>
+    </div>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Premium Mobile Phones</h1>
+    <p>Discover the latest smartphones at competitive prices</p>
+  </div>
+</div>
+
+<!-- Product Grid Section -->
+<div class="product-grid">
+  <h2 style="text-align:center; margin:30px 0;">MobilePhones</h2>
+  <div class="grid-container">
+    <!-- iPhone Series -->
+    <div class="product-card">
+      <img src="image/iphone x.jpg" alt="iPhone X">
+      <h3>iPhone X</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 5.8" Super Retina HD</p>
+        <p><strong>Storage:</strong> 64GB/256GB</p>
+        <p><strong>Camera:</strong> Dual 12MP (Wide, Telephoto)</p>
+        <p><strong>Processor:</strong> A11 Bionic chip</p>
+        <p><strong>Battery:</strong> Up to 13 hours video playback</p>
+      </div>
+      <p class="price">₦299,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="image/Iphones-11-Green.jpg" alt="iPhone 11">
+      <h3>iPhone 11</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.1" Liquid Retina HD</p>
+        <p><strong>Storage:</strong> 64GB/128GB/256GB</p>
+        <p><strong>Camera:</strong> Dual 12MP (Wide, Ultra Wide)</p>
+        <p><strong>Processor:</strong> A13 Bionic chip</p>
+        <p><strong>Battery:</strong> Up to 17 hours video playback</p>
+      </div>
+      <p class="price">₦349,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="image/apple-iphone-12.jpg" alt="iPhone 12">
+      <h3>iPhone 12</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.1" Super Retina XDR</p>
+        <p><strong>Storage:</strong> 64GB/128GB/256GB</p>
+        <p><strong>Camera:</strong> Dual 12MP (Wide, Ultra Wide)</p>
+        <p><strong>Processor:</strong> A14 Bionic chip</p>
+        <p><strong>Battery:</strong> Up to 17 hours video playback</p>
+      </div>
+      <p class="price">₦399,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="image/iphone-12-pro-max.jpg" alt="iPhone 12 Pro Max">
+      <h3>iPhone 12 Pro Max</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.7" Super Retina XDR</p>
+        <p><strong>Storage:</strong> 128GB/256GB/512GB</p>
+        <p><strong>Camera:</strong> Triple 12MP (Wide, Ultra Wide, Telephoto)</p>
+        <p><strong>Processor:</strong> A14 Bionic chip</p>
+        <p><strong>Battery:</strong> Up to 20 hours video playback</p>
+      </div>
+      <p class="price">₦599,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="image/iphone13.jpeg" alt="iPhone 13">
+      <h3>iPhone 13</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.1" Super Retina XDR</p>
+        <p><strong>Storage:</strong> 128GB/256GB/512GB</p>
+        <p><strong>Camera:</strong> Dual 12MP (Wide, Ultra Wide)</p>
+        <p><strong>Processor:</strong> A15 Bionic chip</p>
+        <p><strong>Battery:</strong> Up to 19 hours video playback</p>
+      </div>
+      <p class="price">₦449,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="image/iphone 14.jpeg" alt="iPhone 14">
+      <h3>iPhone 14</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.1" Super Retina XDR</p>
+        <p><strong>Storage:</strong> 128GB/256GB/512GB</p>
+        <p><strong>Camera:</strong> Dual 12MP (Wide, Ultra Wide)</p>
+        <p><strong>Processor:</strong> A15 Bionic chip</p>
+        <p><strong>Battery:</strong> Up to 20 hours video playback</p>
+      </div>
+      <p class="price">₦499,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="image/iphone-15.jpg" alt="iPhone 15">
+      <h3>iPhone 15</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.1" Super Retina XDR</p>
+        <p><strong>Storage:</strong> 128GB/256GB/512GB</p>
+        <p><strong>Camera:</strong> Dual 48MP + 12MP</p>
+        <p><strong>Processor:</strong> A16 Bionic chip</p>
+        <p><strong>Battery:</strong> Up to 20 hours video playback</p>
+      </div>
+      <p class="price">₦549,999</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="image/iphone-16-.jpg" alt="iPhone 16">
+      <h3>iPhone 16</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.1" Super Retina XDR</p>
+        <p><strong>Storage:</strong> 128GB/256GB/512GB/1TB</p>
+        <p><strong>Camera:</strong> Triple 48MP + 12MP + 12MP</p>
+        <p><strong>Processor:</strong> A17 Pro chip</p>
+        <p><strong>Battery:</strong> Up to 22 hours video playback</p>
+      </div>
+      <p class="price">₦599,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Phone 2 -->
+    <div class="product-card">
+      <img src="image/samsung-galaxy-s21-ultra-5g-3.jpg" alt="Samsung S21 Ultra">
+      <h3>Samsung Galaxy S21 Ultra</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.8" Dynamic AMOLED 2X</p>
+        <p><strong>Storage:</strong> 128GB/256GB/512GB</p>
+        <p><strong>Camera:</strong> Quad 108MP + 10MP + 10MP + 12MP</p>
+        <p><strong>Processor:</strong> Exynos 2100</p>
+        <p><strong>Battery:</strong> 5000mAh, Fast Charging</p>
+      </div>
+      <p class="price">₦549,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Phone 3 -->
+    <div class="product-card">
+      <img src="image/pixel-6-pro-7.jpeg" alt="Google Pixel 6 Pro">
+      <h3>Google Pixel 6 Pro</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.7" LTPO OLED</p>
+        <p><strong>Storage:</strong> 128GB/256GB/512GB</p>
+        <p><strong>Camera:</strong> 50MP + 12MP + 48MP</p>
+        <p><strong>Processor:</strong> Google Tensor</p>
+        <p><strong>Battery:</strong> 5003mAh, Fast Charging</p>
+      </div>
+      <p class="price">₦499,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Phone 4 -->
+    <div class="product-card">
+      <img src="image/9-pro-5.jpeg" alt="OnePlus 9 Pro">
+      <h3>OnePlus 9 Pro</h3>
+      <div class="specs">
+        <p><strong>Display:</strong> 6.7" Fluid AMOLED</p>
+        <p><strong>Storage:</strong> 128GB/256GB</p>
+        <p><strong>Camera:</strong> 48MP + 50MP + 8MP + 2MP</p>
+        <p><strong>Processor:</strong> Snapdragon 888</p>
+        <p><strong>Battery:</strong> 4500mAh, Warp Charge 65T</p>
+      </div>
+      <p class="price">₦459,999</p>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px;">
+    <div>
+      <h3>About Us</h3>
+      <p>Your trusted online store for quality electronics and gadgets at competitive prices.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="Home.html" style="color: white; text-decoration: none;">Home</a></li>
+        <li><a href="mobile.html" style="color: white; text-decoration: none;">Phones</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">Contact</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact Info</h3>
+      <p>Email: info@store.com</p>
+      <p>Phone: +234 800 000 0000</p>
+      <p>Lagos, Nigeria</p>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+    <p>&copy; 2023 Electronics Store. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width:100%;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Hero Section Styles */
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a');
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: #555;
+}
+
+/* Product Card Styles */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.product-card .price {
+  color: #333;
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.product-card .specs {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.product-card button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #555;
+}
+
+/* Product Grid Layout */
+.product-grid {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body style="background-color:white;">
+
+<div class="navbar">
+  <a href="#home">Home</a>
+  <a href="#news">Products</a>
+  <a href="#news">Cart</a>
+  <div class="dropdown">
+    <button class="dropbtn">More
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="mobile.html">mobile</a>
+      <a href="#">Clothes</a>
+      <a href="#">Shoes</a>
+      <a href="#">Health</a>
+      <a href="#">Beauty</a>
+      <a href="#">Baby</a>
+      <a href="#">Home Appliances</a>
+    </div>
+  </div> 
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Welcome to Our Store</h1>
+    <p>Discover amazing products at unbeatable prices</p>
+    <a href="#shop" class="hero-btn">Shop Now</a>
+  </div>
+</div>
+
+<!-- Product Grid Section -->
+<div class="product-grid">
+  <h2 style="text-align:center; margin:30px 0;">Featured Products</h2>
+  <div class="grid-container">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="image/iphone-12-pro-max.jpg" alt="Smartphone">
+      <h3>iPhone 12 Pro Max</h3>
+      <div class="specs">
+        <p>6.7" Super Retina XDR</p>
+        <p>128GB Storage</p>
+        <p>Triple Camera System</p>
+      </div>
+      <p class="price">₦599,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="image/Apple MacBook pro.jpeg" alt="Laptop">
+      <h3>MacBook Pro</h3>
+      <div class="specs">
+        <p>13.3" Retina Display</p>
+        <p>16GB RAM</p>
+        <p>512GB SSD</p>
+      </div>
+      <p class="price">₦899,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="image/Wireless Headphone Bluetooth style 3.jpg" alt="Headphones">
+      <h3>Wireless Headphones</h3>
+      <div class="specs">
+        <p>Active Noise Cancelling</p>
+        <p>30hr Battery Life</p>
+        <p>Bluetooth 5.0</p>
+      </div>
+      <p class="price">₦199,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="image/Series 8 Fitness Smart Watch.jpg" alt="Smart Watch">
+      <h3>Smart Watch Series 8</h3>
+      <div class="specs">
+        <p>Heart Rate Monitor</p>
+        <p>Water Resistant</p>
+        <p>18hr Battery</p>
+      </div>
+      <p class="price">₦249,999</p>
+      <button>Add to Cart</button>
+    </div>
+    
+   
+   
+  </div>
+</div>
+
+<footer style="background-color: #333; color: white; padding: 30px 0; margin-top: 50px;">
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px;">
+    <div>
+      <h3>About Us</h3>
+      <p>Your trusted online store for quality electronics and gadgets at competitive prices.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: white; text-decoration: none;">Home</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">Products</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">Contact</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact Info</h3>
+      <p>Email: info@store.com</p>
+      <p>Phone: +234 800 000 0000</p>
+      <p>Lagos, Nigeria</p>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+    <p>&copy; 2023 Electronics Store. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
